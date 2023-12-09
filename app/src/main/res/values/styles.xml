@@ -1,0 +1,6 @@
+<resources>
+    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/material_dynamic_secondary0</item>
+        <item name="tabIndicatorHeight">2dp</item>
+    </style>
+</resources>

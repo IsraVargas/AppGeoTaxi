@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <!-- Contenedor principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp">
+
+        <!-- Contenido existente -->
+        <EditText
+            android:id="@+id/tr_description_pr"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="¿Qué necesitas?"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/tr_origin_pr"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="¿En donde te encuentras?"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/tr_destination_pr"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="¿A donde vas?"
+            android:inputType="text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/tr_dia_pr"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="Día"
+                android:textSize="19dp"
+                android:textAlignment="center"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/tr_mes_pr"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="Mes"
+                android:textSize="19dp"
+                android:textAlignment="center"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/tr_año_pr"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="Año"
+                android:textSize="19dp"
+                android:textAlignment="center"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+
+            <TextView
+                android:id="@+id/horas_pr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="19dp"
+                android:textAlignment="center"
+                android:text="Hora:" />
+
+            <Spinner
+                android:id="@+id/tr_horas_pr"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:textSize="19dp"
+                android:textAlignment="center"
+                android:entries="@array/Horas"/>
+
+            <Spinner
+                android:id="@+id/tr_minutos_pr"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:textSize="19dp"
+                android:textAlignment="center"
+                android:entries="@array/Minutos" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_request"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:onClick="solicitarCR"
+            android:text="Solicitar" />
+
+        <ListView
+            android:id="@+id/listViewMandados"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0.5dp"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
