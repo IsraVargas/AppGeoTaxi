@@ -43,7 +43,7 @@ public class Adapter_MA extends ArrayAdapter<MandadosFragment> {
         //infUser.setText(ViajesFragmentList.get(position).getUser_FK());
         infOrigin.setText(MandadosFragmentList.get(position).getTR_origin());
         infDestination.setText(MandadosFragmentList.get(position).getTR_destination());
-        infPrice.setText(MandadosFragmentList.get(position).getTR_description());
+        infDescription.setText(MandadosFragmentList.get(position).getTR_description());
         infPrice.setText(MandadosFragmentList.get(position).getTR_price());
 
         return view;
