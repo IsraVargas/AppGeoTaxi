@@ -24,14 +24,14 @@
             android:id="@+id/tr_origin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="¿En donde te encuentras?"
+            android:hint="¿En dónde lo buscamos?"
             android:inputType="text" />
 
         <EditText
             android:id="@+id/tr_destination"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="¿A donde vas?"
+            android:hint="¿A dónde lo llevamos?"
             android:inputType="text" />
 
         <Button

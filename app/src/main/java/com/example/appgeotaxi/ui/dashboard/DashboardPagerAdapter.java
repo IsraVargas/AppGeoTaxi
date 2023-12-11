@@ -19,7 +19,7 @@ public class DashboardPagerAdapter extends FragmentPagerAdapter{
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new ViajesFragmentPR(); // Reemplaza ViajesFragment con tu fragmento real
+                return new ViajesFragmentVP(); // Reemplaza ViajesFragment con tu fragmento real
             case 1:
                 return new MandadosFragmentPR(); // Reemplaza MandadosFragment con tu fragmento real
             case 2:

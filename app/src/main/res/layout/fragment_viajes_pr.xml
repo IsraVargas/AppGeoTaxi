@@ -38,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:hint="Día"
+                android:hint="Día (01)"
                 android:textSize="19dp"
                 android:textAlignment="center"
                 android:inputType="text" />
@@ -48,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:hint="Mes"
+                android:hint="Mes (01)"
                 android:textSize="19dp"
                 android:textAlignment="center"
                 android:inputType="text" />
@@ -58,7 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:hint="Año"
+                android:hint="Año (2023)"
                 android:textSize="19dp"
                 android:textAlignment="center"
                 android:inputType="text" />
@@ -72,7 +72,7 @@
 
 
             <TextView
-                android:id="@+id/horas_pr"
+                android:id="@+id/hora_pr"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -81,9 +81,9 @@
                 android:text="Hora:" />
 
             <Spinner
-                android:id="@+id/tr_horas_pr"
+                android:id="@+id/tr_hora_pr"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:textSize="19dp"
                 android:textAlignment="center"
@@ -92,7 +92,7 @@
             <Spinner
                 android:id="@+id/tr_minutos_pr"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:textSize="19dp"
                 android:textAlignment="center"
