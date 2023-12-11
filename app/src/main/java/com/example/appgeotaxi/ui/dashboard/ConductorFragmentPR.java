@@ -17,13 +17,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.appgeotaxi.Adapter_CP_PR;
+import com.example.appgeotaxi.Adapter_CR_PR;
+import com.example.appgeotaxi.Adapter_MA_PR;
 import com.example.appgeotaxi.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,11 +47,11 @@ public class ConductorFragmentPR extends Fragment {
 
 
     //Para listar solicitudes
-    ListView listViewViajes;
-    //Adapter_CR_PR adapterCrPr;
-    public static ArrayList<MandadosFragmentPR> viajesFragmentList = new ArrayList<>();
-    String url="https://appgeotaxi.000webhostapp.com/mostrar.php?TypeTravel=MP";
-    ViajesFragmentVP viajesFragmentVP;
+    ListView listViewConductor;
+    Adapter_CP_PR adapterCpPr;
+    public static ArrayList<ConductorFragmentPR> conductorFragmentList = new ArrayList<>();
+    String url="https://appgeotaxi.000webhostapp.com/mostrar.php?TypeTravel=CP";
+    ConductorFragmentPR conductorFragmentPR;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,16 +74,15 @@ public class ConductorFragmentPR extends Fragment {
             }
         });
 
-        /*
         // Para listar viajes
-        listViewViajes = view.findViewById(R.id.listViewViajes);
-        adapterCrPr = new Adapter_CR_PR(getActivity(), viajesFragmentList);
-        listViewViajes.setAdapter(adapterCrPr);
+        listViewConductor = view.findViewById(R.id.listViewConductor);
+        adapterCpPr = new Adapter_CP_PR(getActivity(), conductorFragmentList);
+        listViewConductor.setAdapter(adapterCpPr);
 
-        if (viajesFragmentList.isEmpty()) {
-            //ListarDatos();
+        if (conductorFragmentList.isEmpty()) {
+            ListarDatos();
         }
-        */
+
         return view;
     }
 
@@ -110,7 +120,7 @@ public class ConductorFragmentPR extends Fragment {
                 // Limpia los campos después de la inserción
                 clearFields();
 
-                //ListarDatos();
+                ListarDatos();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -161,4 +171,81 @@ public class ConductorFragmentPR extends Fragment {
         minuteSpinner.setSelection(0);
     }
 
+    //PARA LISTAR LOS VIAJES
+    String User_FK, TR_origin, TR_destination, TR_price, TR_datetime, TR_description;
+
+    public ConductorFragmentPR(){
+    }
+
+    public ConductorFragmentPR(String User_FK, String TR_origin, String TR_destination, String TR_price, String TR_datetime, String TR_description){
+        this.User_FK = User_FK;
+        this.TR_origin = TR_origin;
+        this.TR_destination = TR_destination;
+        this.TR_price = TR_price;
+        this.TR_datetime = TR_datetime;
+        this.TR_description = TR_description;
+    }
+
+    public String getTR_origin() { return TR_origin; }
+
+    public String getTR_destination() { return TR_destination; }
+
+    public String getTR_price() { return TR_price; }
+
+    public String getTR_datetime() { return TR_datetime; }
+
+    public String getTR_description() { return TR_description; }
+
+
+    //MÉTODO PARA LISTAR LOS DATOS
+    private void ListarDatos() {
+        Log.e("Entrada1", "Entro al método ListarDatos");
+        conductorFragmentList.clear(); // Limpiar la lista antes de agregar nuevos datos
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Respuesta del servidor", response);  // Registra la respuesta completa
+                Log.e("Entrada2", "Entro al onResponse");
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String exito = jsonObject.getString("exito");
+                    JSONArray jsonArray = jsonObject.getJSONArray("datos");
+                    if (exito.equals("1")) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject object = jsonArray.getJSONObject(i);
+
+                            String user = object.getString("User_FK");
+                            String origin = object.getString("TravelRequest_origin");
+                            String destination = object.getString("TravelRequest_destination");
+                            String price = object.getString("TravelRequest_price");
+                            String datetimeString = object.getString("TravelRequest_datetime");
+                            String description = object.getString("TravelRequest_description");
+
+                            // Formatea el datetime para mostrar solo hasta los minutos
+                            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSS");
+                            SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy   HH:mm");
+                            Date date = inputFormat.parse(datetimeString);
+                            String formattedDatetime = outputFormat.format(date);
+
+                            conductorFragmentPR = new ConductorFragmentPR(user, origin, destination, price, formattedDatetime, description);
+                            conductorFragmentList.add(conductorFragmentPR);
+                            Log.e("Entrada3", "Entro y pasó por el for");
+                        }
+                        adapterCpPr.notifyDataSetChanged(); // Notificar al adaptador que los datos han cambiado
+                    }
+                } catch (JSONException | ParseException e) {
+                    Log.e("Entrada4", "Entro al catch");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+    }
 }
