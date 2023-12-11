@@ -29,7 +29,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
 
-            android:text="00-00-0000 hh:mm:ss"
+            android:text="00-00-0000   hh:mm"
             android:textSize="18dp"
 
             android:textStyle="normal" />

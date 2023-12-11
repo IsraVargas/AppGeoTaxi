@@ -11,26 +11,25 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.appgeotaxi.Adapter_CR_PR;
-import com.example.appgeotaxi.Adapter_MA;
+import com.example.appgeotaxi.Adapter_MA_PR;
 import com.example.appgeotaxi.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,10 +45,10 @@ public class MandadosFragmentPR extends Fragment {
 
     //Para listar solicitudes
     ListView listViewViajes;
-    Adapter_CR_PR adapterCrPr;
-    public static ArrayList<MandadosFragmentPR> viajesFragmentList = new ArrayList<>();
+    Adapter_MA_PR adapterMaPr;
+    public static ArrayList<MandadosFragmentPR> mandadosFragmentList = new ArrayList<>();
     String url="https://appgeotaxi.000webhostapp.com/mostrar.php?TypeTravel=MP";
-    ViajesFragmentVP viajesFragmentVP;
+    MandadosFragmentPR mandadosFragmentPR;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -168,6 +167,80 @@ public class MandadosFragmentPR extends Fragment {
         // Establece valores predeterminados para los spinners
         hourSpinner.setSelection(0); // Coloca el primer elemento como seleccionado
         minuteSpinner.setSelection(0);
+    }
+
+    //PARA LISTAR LOS VIAJES
+    String User_FK, TR_origin, TR_destination, TR_price, TR_datetime;
+
+    public MandadosFragmentPR(){
+    }
+
+    public MandadosFragmentPR(String User_FK, String TR_origin, String TR_destination, String TR_price, String TR_datetime){
+        this.User_FK = User_FK;
+        this.TR_origin = TR_origin;
+        this.TR_destination = TR_destination;
+        this.TR_price = TR_price;
+        this.TR_datetime = TR_datetime;
+    }
+
+    public String getTR_origin() { return TR_origin; }
+
+    public String getTR_destination() { return TR_destination; }
+
+    public String getTR_price() { return TR_price; }
+
+    public String getTR_datetime() { return TR_datetime; }
+
+
+    //MÉTODO PARA LISTAR LOS DATOS
+    private void ListarDatos() {
+        Log.e("Entrada1", "Entro al método ListarDatos");
+        mandadosFragmentList.clear(); // Limpiar la lista antes de agregar nuevos datos
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Respuesta del servidor", response);  // Registra la respuesta completa
+                Log.e("Entrada2", "Entro al onResponse");
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String exito = jsonObject.getString("exito");
+                    JSONArray jsonArray = jsonObject.getJSONArray("datos");
+                    if (exito.equals("1")) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject object = jsonArray.getJSONObject(i);
+
+                            String user = object.getString("User_FK");
+                            String origin = object.getString("TravelRequest_origin");
+                            String destination = object.getString("TravelRequest_destination");
+                            String price = object.getString("TravelRequest_price");
+                            String datetimeString = object.getString("TravelRequest_datetime");
+
+                            // Formatea el datetime para mostrar solo hasta los minutos
+                            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSS");
+                            SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy   HH:mm");
+                            Date date = inputFormat.parse(datetimeString);
+                            String formattedDatetime = outputFormat.format(date);
+
+                            mandadosFragmentPR = new MandadosFragmentPR(user, origin, destination, price, formattedDatetime);
+                            mandadosFragmentList.add(mandadosFragmentPR);
+                            Log.e("Entrada3", "Entro y pasó por el for");
+                        }
+                        adapterMaPr.notifyDataSetChanged(); // Notificar al adaptador que los datos han cambiado
+                    }
+                } catch (JSONException | ParseException e) {
+                    Log.e("Entrada4", "Entro al catch");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
     }
 }
 
