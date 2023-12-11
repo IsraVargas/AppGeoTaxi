@@ -117,6 +117,8 @@ public class ViajesFragmentVP extends Fragment {
                 // Limpia los campos después de la inserción
                 clearFields();
 
+                ListarDatos();
+
             }
         }, new Response.ErrorListener() {
             @Override

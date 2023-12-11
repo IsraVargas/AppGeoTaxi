@@ -44,7 +44,7 @@ public class MandadosFragmentPR extends Fragment {
 
 
     //Para listar solicitudes
-    ListView listViewViajes;
+    ListView listViewMandados;
     Adapter_MA_PR adapterMaPr;
     public static ArrayList<MandadosFragmentPR> mandadosFragmentList = new ArrayList<>();
     String url="https://appgeotaxi.000webhostapp.com/mostrar.php?TypeTravel=MP";
@@ -71,16 +71,15 @@ public class MandadosFragmentPR extends Fragment {
             }
         });
 
-        /*
         // Para listar viajes
-        listViewViajes = view.findViewById(R.id.listViewViajes);
-        adapterCrPr = new Adapter_CR_PR(getActivity(), viajesFragmentList);
-        listViewViajes.setAdapter(adapterCrPr);
+        listViewMandados = view.findViewById(R.id.listViewMandados);
+        adapterMaPr = new Adapter_MA_PR(getActivity(), mandadosFragmentList);
+        listViewMandados.setAdapter(adapterMaPr);
 
-        if (viajesFragmentList.isEmpty()) {
-            //ListarDatos();
+        if (mandadosFragmentList.isEmpty()) {
+            ListarDatos();
         }
-        */
+
         return view;
     }
 
@@ -118,7 +117,7 @@ public class MandadosFragmentPR extends Fragment {
                 // Limpia los campos después de la inserción
                 clearFields();
 
-                //ListarDatos();
+                ListarDatos();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -170,17 +169,18 @@ public class MandadosFragmentPR extends Fragment {
     }
 
     //PARA LISTAR LOS VIAJES
-    String User_FK, TR_origin, TR_destination, TR_price, TR_datetime;
+    String User_FK, TR_origin, TR_destination, TR_price, TR_datetime, TR_description;
 
     public MandadosFragmentPR(){
     }
 
-    public MandadosFragmentPR(String User_FK, String TR_origin, String TR_destination, String TR_price, String TR_datetime){
+    public MandadosFragmentPR(String User_FK, String TR_origin, String TR_destination, String TR_price, String TR_datetime, String TR_description){
         this.User_FK = User_FK;
         this.TR_origin = TR_origin;
         this.TR_destination = TR_destination;
         this.TR_price = TR_price;
         this.TR_datetime = TR_datetime;
+        this.TR_description = TR_description;
     }
 
     public String getTR_origin() { return TR_origin; }
@@ -190,6 +190,8 @@ public class MandadosFragmentPR extends Fragment {
     public String getTR_price() { return TR_price; }
 
     public String getTR_datetime() { return TR_datetime; }
+
+    public String getTR_description() { return TR_description; }
 
 
     //MÉTODO PARA LISTAR LOS DATOS
@@ -215,6 +217,7 @@ public class MandadosFragmentPR extends Fragment {
                             String destination = object.getString("TravelRequest_destination");
                             String price = object.getString("TravelRequest_price");
                             String datetimeString = object.getString("TravelRequest_datetime");
+                            String description = object.getString("TravelRequest_description");
 
                             // Formatea el datetime para mostrar solo hasta los minutos
                             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSS");
@@ -222,7 +225,7 @@ public class MandadosFragmentPR extends Fragment {
                             Date date = inputFormat.parse(datetimeString);
                             String formattedDatetime = outputFormat.format(date);
 
-                            mandadosFragmentPR = new MandadosFragmentPR(user, origin, destination, price, formattedDatetime);
+                            mandadosFragmentPR = new MandadosFragmentPR(user, origin, destination, price, formattedDatetime, description);
                             mandadosFragmentList.add(mandadosFragmentPR);
                             Log.e("Entrada3", "Entro y pasó por el for");
                         }

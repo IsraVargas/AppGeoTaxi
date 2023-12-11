@@ -22,7 +22,7 @@ public class Adapter_MA_PR extends ArrayAdapter<MandadosFragmentPR> {
 
     public Adapter_MA_PR(@NonNull Context context, List<MandadosFragmentPR>MandadosFragmentList) {
 
-        super(context, R.layout.list_travelrequest_cr_pr,MandadosFragmentList);
+        super(context, R.layout.list_travelrequest_ma_pr,MandadosFragmentList);
         this.context=context;
         this.MandadosFragmentList=MandadosFragmentList;
 
@@ -39,6 +39,7 @@ public class Adapter_MA_PR extends ArrayAdapter<MandadosFragmentPR> {
         TextView infDestination = view.findViewById(R.id.inf_destination);
         TextView infPrice = view.findViewById(R.id.inf_price);
         TextView infFecha = view.findViewById(R.id.inf_fecha);
+        TextView infdescription = view.findViewById(R.id.inf_description);
 
 
         //infUser.setText(ViajesFragmentList.get(position).getUser_FK());
@@ -46,6 +47,7 @@ public class Adapter_MA_PR extends ArrayAdapter<MandadosFragmentPR> {
         infDestination.setText(MandadosFragmentList.get(position).getTR_destination());
         infPrice.setText(MandadosFragmentList.get(position).getTR_price());
         infFecha.setText(MandadosFragmentList.get(position).getTR_datetime());
+        infdescription.setText(MandadosFragmentList.get(position).getTR_description());
 
         return view;
 
