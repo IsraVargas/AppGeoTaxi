@@ -11,24 +11,27 @@
         android:layout_height="60dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="100dp"
-        android:background="@drawable/ic_busqueda_24"
+        android:background="@drawable/mujer"
         android:contentDescription="Foto de perfil"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:srcCompat="@drawable/mujer" />
 
     <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/p_username"
+        android:layout_width="258dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="-200dp"
         android:layout_marginTop="8dp"
         android:text="Usuario"
         android:textSize="20sp"
-        android:layout_marginStart="-200dp"
-        app:layout_constraintTop_toTopOf="@id/profileImage"
-        app:layout_constraintStart_toEndOf="@id/profileImage"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/profileImage"
-        android:textStyle="bold"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintStart_toEndOf="@id/profileImage"
+        app:layout_constraintTop_toTopOf="@id/profileImage"
+        app:layout_constraintVertical_bias="0.26" />
 
     <LinearLayout
         android:id="@+id/optionsLayout"
@@ -45,45 +48,48 @@
 
         <!-- Opción 1: Información de la cuenta -->
         <TextView
+            android:id="@+id/bt_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:drawableStart="@drawable/ic_usuario_24"
+            android:drawablePadding="30dp"
             android:gravity="start|center_vertical"
             android:onClick="onButtonClick"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="Información de la cuenta"
-            android:layout_marginTop="20dp"
-            android:textSize="18sp"
-            android:drawablePadding="30dp"/>
+            android:textSize="18sp" />
 
         <!-- Opción 2: Cambiar contraseña -->
         <TextView
+            android:id="@+id/bt_contra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:drawableStart="@drawable/ic_cerrar_24"
+            android:drawablePadding="30dp"
             android:gravity="start|center_vertical"
+            android:onClick="onButtonClick"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:drawableStart="@drawable/ic_cerrar_24"
             android:text="Cambiar contraseña"
-            android:onClick="onButtonClick"
-            android:layout_marginTop="30dp"
-            android:textSize="18sp"
-            android:drawablePadding="30dp"/>
+            android:textSize="18sp" />
 
         <!-- Opción 3: Términos y condiciones -->
         <TextView
+            android:id="@+id/bt_terminos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:drawableStart="@drawable/ic_informacion_24"
+            android:drawablePadding="30dp"
             android:gravity="start|center_vertical"
+            android:onClick="onButtonClick"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:drawableStart="@drawable/ic_informacion_24"
-            android:text="Términos y condiciones"
-            android:onClick="onButtonClick"
-            android:layout_marginTop="30dp"
-            android:textSize="18sp"
-            android:drawablePadding="30dp"/>
+            android:text="Terminos y condiciones"
+            android:textSize="18sp" />
 
         <!-- Opción 4: Cerrar sesión -->
         <TextView
@@ -94,7 +100,6 @@
             android:paddingEnd="16dp"
             android:drawableStart="@drawable/ic_salida_24"
             android:text="Cerrar sesión"
-            android:onClick="onButtonClick"
             android:layout_marginTop="30dp"
             android:textSize="18sp"
             android:drawablePadding="30dp"/>

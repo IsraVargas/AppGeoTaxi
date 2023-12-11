@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.005"
+        android:layout_width="405dp"
+        android:layout_height="63dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/bt_regresar"
+            app:srcCompat="@drawable/ic_flecha_pequena_izquierda_24"
+            app:tint="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_flecha_pequena_izquierda_24"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_flecha_pequena_izquierda_24" />
+
+        <Space
+            android:layout_width="23dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Términos y Condiciones"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.09" />
+
+    <ScrollView
+        android:layout_width="333dp"
+        android:layout_height="569dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintVertical_bias="0.305">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="
+1.Registro y Autenticación: Todos los usuarios deben registrarse en la aplicación con sus credenciales únicas. Los clientes deben proporcionar información precisa y actualizada durante el proceso de registro.\n
+2.Confidencialidad de Credenciales: Los usuarios son responsables de mantener la confidencialidad de sus credenciales de acceso. Cualquier actividad realizada con las credenciales de un usuario se considera responsabilidad del usuario.\n
+3.Solicitud de Servicios: Los clientes pueden solicitar servicios a través de la aplicación y deben proporcionar información precisa y detallada sobre sus necesidades de servicio.\n
+4.Programación de Servicios: Los clientes pueden programar servicios como viajes, entregas o solicitudes de conductor. Deben proporcionar información precisa sobre la programación.\n
+3.Visualización del Estado de la Solicitud: Los clientes pueden ver el estado de sus solicitudes en la aplicación, lo que incluye En Espera, En Curso, Finalizado y Cancelado.\n
+Al utilizar la aplicación, los usuarios aceptan cumplir con estos términos y condiciones. Cualquier violación de estos términos puede resultar en la suspensión o terminación de la cuenta del usuario. Además, la aplicación se reserva el derecho de realizar cambios en estos términos y condiciones en cualquier momento y notificará a los usuarios sobre tales cambios.
+" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

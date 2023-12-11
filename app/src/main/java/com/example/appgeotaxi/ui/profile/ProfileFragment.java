@@ -10,13 +10,16 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.appgeotaxi.R;
+import com.example.appgeotaxi.databinding.FragmentHomeBinding;
 import com.google.android.material.tabs.TabLayout;
 
 public class ProfileFragment extends Fragment {
 
+    private FragmentHomeBinding binding;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_perfil, container, false);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Configurar ViewPager y TabLayout
         ViewPager viewPager = root.findViewById(R.id.viewPager);
@@ -30,5 +33,11 @@ public class ProfileFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
         return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
